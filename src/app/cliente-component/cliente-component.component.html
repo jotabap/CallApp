@@ -1,0 +1,52 @@
+<div>
+    <mat-toolbar>
+        <span class>Call Center App</span>
+        <span class="example-spacer"></span>
+    </mat-toolbar>
+</div>
+<p>
+    Busqueda Por Cedula:<br/>
+    <input  type="cedula"[formControl]="cedulactr"> 
+                   
+</p> 
+<p *ngIf="cedulactr.errors && cedulactr.dirty" >
+    <small *ngIf="cedulactr.hasError('required')">Este campo es requieido</small>
+    <small *ngIf="cedulactr.hasError('pattern')">Solo valores numericos</small>
+    <small *ngIf="cedulactr.hasError('maxlength')">Valor máximo de diez</small>
+</p>
+<div  class="example-button-row">
+    <button mat-raised-button color="Warn" [disabled]="cedulactr.invalid" type="button" (click)="getCedula($event)">Enviar</button>
+   </div>
+<p>
+
+</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+           <!-- Name Column -->
+    <ng-container matColumnDef="cedula">
+      <th mat-header-cell *matHeaderCellDef> Cedula </th>
+      <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="nombre_Completo">
+      <th mat-header-cell *matHeaderCellDef> Nombre Completo </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre_Completo}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fecha_Pago">
+      <th mat-header-cell *matHeaderCellDef> Fecha Pago </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_Pago}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef> Monto </th>
+        <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

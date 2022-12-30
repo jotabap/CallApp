@@ -1,0 +1,176 @@
+import { Injectable } from "@angular/core";
+import swal from 'sweetalert2';
+
+@Injectable({
+    providedIn:'root'
+})
+export class AlertService{
+    constructor(){ }
+    options={
+        icon:'question',
+        message:'',
+        timer:'',
+        from:'top',
+        align:'rigth',
+        type:'success',
+        title:'',
+        text:'',
+        buttonStyling:false,
+        showCancelButton:false,
+        confirmButton:'btn',
+        confirmButtonColor:'#3085d6',
+        cancelButtonColor:'#d33',
+        confirmButtonText:'Aceptar',
+        cancelButtonText:'Cancelar'
+    };
+    options2={
+        icon:'question',
+        message:'',
+        timer:'',
+        from:'top',
+        align:'rigth',
+        type:'success',
+        title:'',
+        text:'',
+        buttonStyling:false,
+       
+        confirmButton:'btn',
+        confirmButtonColor:'#3085d6',
+       
+        confirmButtonText:'Aceptar',
+        
+    };
+    icon:any='question';
+    setOptions(options:any):void{
+        if(options.title){
+            this.options.title=options.title;
+        }
+        if(options.text){
+            this.options.text=options.text;
+        }
+        if(options.buttonStyling){
+            this.options.buttonStyling=options.buttonStyling;
+        }
+        if(options.confirmButton){
+            this.options.confirmButton=options.confirmButton;
+        }
+        if(options.message){
+            this.options.message=options.message;
+        }
+        if(options.icon){
+            this.options.icon=options.icon;
+        }
+        if(options.showCancelButton){
+            this.options.showCancelButton=options.showCancelButton;
+        }
+        if(options.confirmButtonColor){
+            this.options.confirmButtonColor=options.confirmButtonColor;
+        }
+        if(options.cancelButtonColor){
+            this.options.cancelButtonColor=options.cancelButtonColor;
+        }
+        if(options.cancelButtonText){
+            this.options.cancelButtonText=options.cancelButtonText;
+        }
+        if(options.confirmButtonText){
+            this.options.confirmButtonText=options.confirmButtonText;
+        }
+
+    }
+    showOptions(options2:any):void{
+        if(options2.title){
+            this.options.title=options2.title;
+        }
+        if(options2.text){
+            this.options.text=options2.text;
+        }
+        if(options2.buttonStyling){
+            this.options.buttonStyling=options2.buttonStyling;
+        }
+        if(options2.confirmButton){
+            this.options.confirmButton=options2.confirmButton;
+        }
+        if(options2.message){
+            this.options.message=options2.message;
+        }
+        if(options2.icon){
+            this.options.icon=options2.icon;
+        }
+     
+        if(options2.confirmButtonColor){
+            this.options.confirmButtonColor=options2.confirmButtonColor;
+        }
+      
+        if(options2.confirmButtonText){
+            this.options.confirmButtonText=options2.confirmButtonText;
+        }
+
+    }
+alert():void{
+    swal.fire({
+        title:this.options.title,
+        text:this.options.text,
+        buttonsStyling:this.options.buttonStyling,
+        confirmButtonText:this.options.confirmButtonText,
+        customClass:{
+            confirmButton:this.options.confirmButton,
+        },
+        icon:this.icon
+    })
+}
+confirmAlert(yesOptions:any=null,noOptions:any=null):Promise<boolean>{
+    return new Promise((resolve)=>{
+        swal.fire({
+            title:this.options.title,
+            text:this.options.text, 
+            icon:this.icon,
+            showCancelButton:true,
+            confirmButtonColor:this.options.confirmButtonColor,
+            cancelButtonColor:this.options.cancelButtonColor,
+            confirmButtonText:this.options.confirmButtonText,
+            cancelButtonText:this.options.cancelButtonText
+        }).then((result)=>{
+            if(result.isConfirmed){
+                if(yesOptions){
+                    swal.fire(
+                        yesOptions.title,
+                        yesOptions.text,
+                        yesOptions.icon
+                    )
+                }
+                resolve(true);
+            }else{
+                if(noOptions){
+                    swal.fire(
+                        noOptions.title,
+                        noOptions.text,
+                        noOptions.icon
+                    )
+                }
+                resolve(false);
+            }
+        })
+    })
+    }
+    loadingShow():void{
+        swal.fire({
+            icon:'info',
+            title:'Cargando...',
+            didOpen:()=>{
+                swal.showLoading
+            }
+        })
+    }
+    loadingClose():void{
+        swal.close();
+    }
+   errorMessage(errorService:any){
+    this.setOptions({
+        title:'¡Error! Código HTTP'+errorService.status,
+        text:'Fallo'+errorService.message,
+        icon:'error',
+        confirmButton:'btn',
+    });
+    this.alert();
+   } 
+}
