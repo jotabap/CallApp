@@ -1,4 +1,4 @@
-import { Component,OnInit, } from '@angular/core';
+import { Component,OnInit,AfterViewInit,ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import { Client } from '../models/client.model';
@@ -6,6 +6,8 @@ import { ClientesService } from '../services/client.service';
 import { GenericResponse } from '../models/genericResponse.model';
 import { FormControl,Validators } from '@angular/forms';
 import { AlertService } from '../services/alert.service';
+
+
 
 
 @Component({
@@ -27,6 +29,7 @@ export class ClienteComponentComponent implements OnInit {
   totalPages!:number;
   valor!:number;
   public dataSource:any="";
+
   displayedColumns:string[]=[
    'cedula',
    'nombre_Completo',

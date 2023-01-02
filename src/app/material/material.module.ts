@@ -6,6 +6,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +15,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatPaginatorModule,
     MatDialogModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    
        
   ],
   exports:[
